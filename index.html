@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innovemos - Gestión Ambiental, Social y Climática</title>
+    <meta name="description" content="Transformamos los desafíos ambientales en oportunidades sostenibles">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" crossorigin="anonymous">
+    <style>
+        /* ========== VARIABLES Y FUENTES ========== */
+        @font-face {
+            font-family: 'Mont';
+            src: url('assets/fonts/mont-bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --bg: #FFFFEF;
+            --brand-dark: #006837;
+            --brand-main: #6AAE41;
+            --brand-accent: #6BAB43;
+            --brand-soft: #A0C47C;
+            --ink-title: #292961;
+            --ink-text: #92C846;
+            --ink-muted: #7a7aa0;
+            --page-padding: clamp(12px, 3vw, 24px);
+            --max-width: 1200px;
+            --header-height: 80px;
+            --transition-fast: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+            --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 10px 22px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ========== RESET Y BASE ========== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Mont', system-ui, -apple-system, sans-serif;
+            font-weight: 700;
+            line-height: 1.6;
+            color: var(--ink-title);
+            background-color: var(--bg);
+            overflow-x: hidden;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        main {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ========== HEADER Y NAVEGACIÓN ========== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            z-index: 1000;
+            background: linear-gradient(to left, #006837 0%, #ffffef 100%);
+            box-shadow: var(--shadow-sm);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--page-padding);
+        }
+
+        .logo {
+            height: 50px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-toggle {
+            width: 40px;
+            height: 40px;
+            background: var(--bg);
+            border: none;
+            color: var(--brand-dark);
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: var(--transition-fast);
+        }
+
+        .nav-toggle:hover {
+            background: var(--brand-soft);
+        }
+
+        .nav-links {
+            display: none;
+            list-style: none;
+        }
+
+        .nav-links.active {
+            display: flex;
+        }
+
+        @media (max-width: 767px) {
+            .nav-links {
+                position: absolute;
+                top: var(--header-height);
+                left: 0;
+                width: 100%;
+                background: var(--brand-dark);
+                padding: 1rem 0;
+                box-shadow: var(--shadow-md);
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 0.8rem 1.5rem;
+                color: #fff;
+                text-decoration: none;
+                transition: var(--transition-fast);
+            }
+
+            .nav-links a:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                color: var(--brand-soft);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .nav-toggle {
+                display: none;
+            }
+
+            .nav-links {
+                display: flex;
+                flex-direction: row;
+                gap: 2rem;
+            }
+
+            .nav-links a {
+                color: var(--bg);
+                text-decoration: none;
+                padding: 0.5rem 0;
+                position: relative;
+                transition: var(--transition-fast);
+            }
+
+            .nav-links a::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: var(--brand-dark);
+                transition: width 0.3s ease;
+            }
+
+            .nav-links a:hover::after {
+                width: 100%;
+            }
+        }
+
+        /* ========== SECCIONES ========== */
+        section {
+            padding: clamp(2rem, 5vh, 4rem) var(--page-padding);
+            min-height: calc(100vh - var(--header-height));
+        }
+
+        /* ========== INICIO ========== */
+        #inicio {
+            padding-top: calc(var(--header-height) + 3rem);
+        }
+
+        .parent-inicio {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .parent-inicio {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3rem;
+            }
+        }
+
+        .parent-inicio .div1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 0;
+        }
+
+        .parent-inicio .div1 img {
+            width: clamp(120px, 35vw, 400px);
+            height: auto;
+        }
+
+        .parent-inicio .div2 {
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .parent-inicio .div1 {
+                justify-content: flex-end;
+                padding-right: 2rem;
+            }
+
+            .parent-inicio .div2 {
+                text-align: left;
+                padding-left: 2rem;
+            }
+        }
+
+        .parent-inicio h1 {
+            font-size: clamp(30px, 5vw, 60px);
+            color: var(--ink-title);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .parent-inicio h2 {
+            font-size: clamp(18px, 3vw, 28px);
+            color: var(--ink-text);
+            line-height: 1.3;
+        }
+
+        /* ========== QUIÉNES SOMOS ========== */
+        #quienes {
+            position: relative;
+        }
+
+        #quienes::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, var(--bg) 0%, transparent 15%),
+                        url('assets/images/Imagen1.jpg') center/cover no-repeat;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .parent-quienes {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (min-width: 768px) {
+            .parent-quienes {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .parent-quienes h3 {
+            font-size: clamp(24px, 4vw, 40px);
+            color: var(--ink-title);
+            margin-bottom: 1rem;
+        }
+
+        .parent-quienes h4 {
+            font-size: clamp(16px, 2.5vw, 20px);
+            color: var(--ink-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .parent-quienes p {
+            color: var(--ink-muted);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .destacado {
+            color: var(--ink-title);
+        }
+
+        .parent-quienes ul {
+            list-style: none;
+        }
+
+        .parent-quienes li {
+            margin-bottom: 0.5rem;
+        }
+
+        .inline-icon {
+            display: inline-block;
+            width: 44px;
+            height: 44px;
+            padding: 6px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom, var(--brand-dark), var(--brand-soft));
+            vertical-align: middle;
+            margin-right: 0.5rem;
+            transition: transform var(--transition-smooth);
+        }
+
+        @media (hover: hover) {
+            .inline-icon:hover {
+                transform: translateY(-2px) rotate(-2deg);
+            }
+        }
+
+        .btn-invite {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(12px, 2vw, 18px) clamp(18px, 3vw, 28px);
+            margin: 2rem auto;
+            border-radius: 999px;
+            background: var(--brand-soft);
+            color: #113;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: clamp(14px, 1.6vw, 16px);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-smooth);
+            text-align: center;
+        }
+
+        .btn-invite:hover {
+            transform: translateY(-2px);
+            background: var(--brand-main);
+            color: #fff;
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ========== EQUIPO ========== */
+        .parent-nuestro-equipo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+            gap: clamp(16px, 3vw, 24px);
+            padding: 3rem var(--page-padding);
+        }
+
+        .parent-nuestro-equipo .div5 {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .parent-nuestro-equipo h3 {
+            font-size: clamp(28px, 5vw, 60px);
+            color: var(--ink-title);
+        }
+
+        .team-card {
+            background: #fff;
+            border: 1px solid rgba(41, 41, 97, 0.08);
+            border-radius: 16px;
+            padding: clamp(14px, 2vw, 20px);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 400px;
+            margin: 0 auto;
+            width: 100%;
+            height: 100%;
+            min-height: 420px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        .team-card.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (hover: hover) {
+            .team-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08);
+            }
+        }
+
+        .team-photo {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid rgba(41, 41, 97, 0.06);
+        }
+
+        .team-info h4 {
+            font-size: clamp(16px, 1.6vw, 20px);
+            color: var(--ink-title);
+            margin-bottom: 0.25rem;
+        }
+
+        .team-title {
+            color: var(--brand-main);
+            font-size: clamp(14px, 1.4vw, 18px);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .team-role {
+            color: var(--ink-muted);
+            font-weight: 400;
+            line-height: 1.4;
+            font-size: 0.95rem;
+        }
+
+        /* ========== PILARES ========== */
+        .parent-nuestros {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+            gap: clamp(20px, 4vw, 32px);
+            padding: 2rem var(--page-padding);
+        }
+
+        .parent-nuestros .div13 {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .parent-nuestros h3 {
+            font-size: clamp(28px, 5vw, 60px);
+            color: var(--ink-title);
+        }
+
+        .pillar-card {
+            background: #fff;
+            border: 1px solid rgba(107, 171, 67, 0.2);
+            border-radius: 20px;
+            padding: 24px 18px 20px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            cursor: pointer;
+            transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .pillar-icon {
+            width: 108px;
+            height: 108px;
+            border-radius: 26px;
+            background: linear-gradient(to bottom, var(--brand-main), var(--brand-dark));
+            display: grid;
+            place-items: center;
+            margin-top: -42px;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .pillar-icon img {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+        }
+
+        .pillar-title {
+            color: var(--brand-dark);
+            font-size: clamp(16px, 2vw, 20px);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 6px 0;
+            line-height: 1.15;
+        }
+
+        .pillar-desc {
+            color: var(--ink-muted);
+            font-weight: 400;
+            line-height: 1.5;
+            font-size: clamp(14px, 1.6vw, 16px);
+        }
+
+        /* ========== CONTACTO ========== */
+        #contacto {
+            position: relative;
+            margin-inline: calc(50% - 50vw);
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        #contacto::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: url("assets/images/Imagen2.png") center/cover no-repeat;
+            mask-image: linear-gradient(to top, #000 82%, transparent 100%);
+            z-index: 0;
+        }
+
+        #contacto::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.25) 44%, rgba(0, 0, 0, 0.5) 100%);
+            z-index: 1;
+        }
+
+        .parent-contacto {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: min(var(--max-width), 90vw);
+            margin: 0 auto;
+            padding: clamp(40px, 8vh, 120px) var(--page-padding);
+            text-align: center;
+        }
+
+        .contacto-hero h2 {
+            font-size: clamp(2rem, 6vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .contacto-sub {
+            font-size: clamp(1rem, 2.5vw, 1.6rem);
+            color: var(--brand-soft);
+            margin-bottom: 2rem;
+        }
+
+        .contacto-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: clamp(12px, 2vw, 24px);
+            margin-top: 2rem;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: clamp(12px, 2vw, 18px) clamp(18px, 3vw, 28px);
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: clamp(13px, 1.4vw, 15px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+            transition: var(--transition-smooth);
+            flex: 1;
+            max-width: 400px;
+            min-width: 240px;
+        }
+
+        .contact-btn.mail {
+            background: var(--brand-dark);
+            color: #fff;
+        }
+
+        .contact-btn.wsp {
+            background: var(--brand-main);
+            color: #003300;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+        }
+
+        .contact-btn.mail:hover {
+            background: var(--brand-soft);
+            color: #113;
+        }
+
+        .contact-btn.wsp:hover {
+            background: var(--brand-accent);
+        }
+
+        @media (max-width: 768px) {
+            .contacto-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-btn {
+                width: 100%;
+                max-width: none;
+            }
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: var(--brand-dark);
+            color: #fff;
+            padding: 2rem var(--page-padding);
+            text-align: center;
+            margin-top: 0;
+        }
+
+        footer a {
+            color: var(--brand-soft);
+            text-decoration: none;
+            transition: var(--transition-fast);
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+
+        /* ========== MODAL ========== */
+        .modal {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            display: none;
+        }
+
+        .modal.is-open {
+            display: block;
+        }
+
+        .modal__backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(2px);
+        }
+
+        .modal::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            background: radial-gradient(circle at center, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.45) 70%, rgba(0, 0, 0, 0.55) 100%),
+                        linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.35) 40%, rgba(0, 0, 0, 0.5) 100%);
+        }
+
+        .modal__dialog {
+            position: absolute;
+            inset: 0;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            z-index: 2;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .modal__content {
+            position: relative;
+            z-index: 3;
+            max-width: 1100px;
+            margin: clamp(64px, 8vh, 96px) auto;
+            padding: clamp(16px, 3vw, 24px);
+            color: #fff;
+        }
+
+        .modal__close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background: #fff;
+            color: var(--ink-title);
+            font-size: 26px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+            z-index: 4;
+            transition: var(--transition-fast);
+        }
+
+        .modal__close:hover {
+            transform: scale(1.1);
+        }
+
+        .modal__eyebrow {
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            margin-bottom: 8px;
+        }
+
+        .modal__title {
+            font-size: clamp(28px, 5vw, 56px);
+            line-height: 1.05;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+            margin: 0.2rem 0 0.6rem;
+        }
+
+        .modal__subtitle {
+            max-width: 72ch;
+            font-weight: 400;
+            color: #f3f6f3;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+            margin-bottom: clamp(16px, 3vw, 24px);
+        }
+
+        .modal__cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+            gap: 16px;
+        }
+
+        .modalcard {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(0, 104, 55, 0.16);
+            border-radius: 16px;
+            padding: 14px;
+            color: #2a2a2a;
+            box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
+            display: block;
+            position: relative;
+        }
+
+        .modalcard__head {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 8px;
+            position: relative;
+            width: 100%;
+        }
+
+        .modalcard__bullet {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(to bottom, var(--brand-main), var(--brand-dark));
+            color: #fff;
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            flex-shrink: 0;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.16);
+        }
+
+        .modalcard__title {
+            color: var(--brand-dark);
+            font-size: clamp(14px, 1.4vw, 18px);
+            line-height: 1.2;
+            margin: 0;
+            flex: 1;
+            position: relative;
+            display: inline-block;
+            width: auto;
+        }
+
+        .modalcard__body {
+            clear: both;
+            display: block;
+            position: relative;
+        }
+
+        .modalcard__label {
+            color: var(--brand-main);
+            font-weight: 700;
+            font-size: 0.95em;
+            margin: 0.6rem 0 0.3rem;
+        }
+
+        .modalcard__body p {
+            color: #333;
+            font-weight: 400;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        html.modal-lock,
+        body.modal-lock {
+            overflow: hidden;
+        }
+
+        body.modal-lock {
+            position: fixed;
+            width: 100%;
+        }
+
+        @keyframes modal-in {
+            0% {
+                opacity: 0;
+                transform: translateY(18px) scale(0.98);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal.is-open .modal__content {
+            animation: modal-in 360ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+        }
+
+        /* ========== UTILIDADES ========== */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="assets/images/logo_2.png" alt="Logo Innovemos">
+            </div>
+            <button class="nav-toggle" aria-label="Abrir menú de navegación" aria-expanded="false">
+                <span>☰</span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#quienes">¿Quiénes somos?</a></li>
+                <li><a href="#nuestros">Nuestros pilares</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio" data-offset-m="84"  data-offset-t="96"  data-offset-d="112">
+            <div class="parent-inicio">
+                <div class="div1">
+                    <img src="assets/images/logo.png" alt="Logo Innovemos">
+                </div>
+                <div class="div2">
+                    <h1>INNOVEMOS</h1>
+                    <h2>Gestión Ambiental, Social y Climática</h2>
+                </div>
+            </div>
+        </section>
+
+        <section id="quienes" data-offset-m="84"  data-offset-t="96"  data-offset-d="128">
+            <div class="parent-quienes">
+                <div class="div3">
+                    <h3>¿Quiénes somos?</h3>
+                    <h4>Transformamos los desafíos ambientales en oportunidades sostenibles.</h4>
+                    <p>En Innovemos <span class="destacado">ayudamos a empresas, instituciones y organizaciones a convertir los desafíos ambientales y climáticos en oportunidades</span> estratégicas que fortalecen su negocio y reputación.</p>
+                    <p>Creemos que <span class="destacado">la sostenibilidad no debe ser solo un requisito normativo, sino una ventaja competitiva.</span> Por eso, guiamos a nuestros clientes en la implementación de políticas, estrategias y soluciones que integran el impacto ambiental, social y económico.</p>
+                    <a href="#equipo" class="btn-invite" aria-label="Conocer a nuestro equipo">
+                        TE INVITAMOS A CONOCER A NUESTRO EQUIPO
+                    </a>
+                </div>
+                <div class="div4">
+                    <h3>
+                        <img src="assets/images/simbolo1.png" alt="" class="inline-icon">
+                        <span>NOS DIFERENCIAMOS PORQUE:</span>
+                    </h3>
+                    <ul>
+                        <li><p><span class="destacado">Integramos</span> sostenibilidad al núcleo del negocio.</p></li>
+                        <li><p><span class="destacado">Enfocamos</span> nuestras soluciones en resultados medibles.</p></li>
+                        <li><p><span class="destacado">Combinamos</span> experiencia técnica con visión estratégica.</p></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="parent-nuestro-equipo" id="equipo">
+                <div class="div5">
+                    <h3>NUESTRO EQUIPO</h3>
+                </div>
+                <article class="team-card">
+                    <img class="team-photo" src="assets/images/karen.png" alt="Karen Ubilla">
+                    <div class="team-info">
+                        <h4>KAREN UBILLA</h4>
+                        <p class="team-title">Gerente General y Sostenibilidad</p>
+                        <p class="team-role">Ingeniera en Recursos Naturales Renovables. Magíster en Gestión y Políticas Públicas.</p>
+                    </div>
+                </article>
+                <article class="team-card">
+                    <img class="team-photo" src="assets/images/millaray.png" alt="Millaray Inostroza">
+                    <div class="team-info">
+                        <h4>MILLARAY INOSTROZA</h4>
+                        <p class="team-title">Gerente Sostenibilidad</p>
+                        <p class="team-role">Ingeniera en Recursos Naturales Renovables, Ms. Ecological Resilience for Sustainable Development.</p>
+                    </div>
+                </article>
+                <article class="team-card">
+                    <img class="team-photo" src="assets/images/alvaro.png" alt="Alvaro Boehmwald">
+                    <div class="team-info">
+                        <h4>ÁLVARO BOEHMWALD</h4>
+                        <p class="team-title">Jefe Área Gestión de cumplimiento</p>
+                        <p class="team-role">Ingeniero Ambiental, Magíster en Sistemas Integrados de Calidad y en Derecho Ambiental.</p>
+                    </div>
+                </article>
+                <article class="team-card">
+                    <img class="team-photo" src="assets/images/daniel.png" alt="Daniel Rubalcava">
+                    <div class="team-info">
+                        <h4>DANIEL RUBALCAVA</h4>
+                        <p class="team-title">Asesor Internacional-Economía y reportabilidad</p>
+                        <p class="team-role">Economista, Magíster en Gestión y Políticas Públicas.</p>
+                    </div>
+                </article>
+                <article class="team-card">
+                    <img class="team-photo" src="assets/images/camila.png" alt="Camila Cantillana">
+                    <div class="team-info">
+                        <h4>CAMILA CANTILLANA</h4>
+                        <p class="team-title">Jefa de Proyectos</p>
+                        <p class="team-role">Ingeniera en Recursos Naturales Renovables, Magister en Gestión y Políticas Públicas.</p>
+                    </div>
+                </article>
+                <article class="team-card">
+                    <img class="team-photo" src="assets/images/camila2.png" alt="Camila Ruiz">
+                    <div class="team-info">
+                        <h4>CAMILA RUIZ</h4>
+                        <p class="team-title">Jefa de Proyectos</p>
+                        <p class="team-role">Ingeniera Física, especialista en modelación y control de gestión</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="nuestros" data-offset-m="84"  data-offset-t="96"  data-offset-d="80">
+            <div class="parent-nuestros">
+                <div class="div13">
+                    <h3>NUESTROS PILARES</h3>
+                </div>
+                <article class="pillar-card" data-modal="modal-p1" data-bg="assets/images/Imagen3.png">
+                    <div class="pillar-icon">
+                        <img src="assets/images/simbolo1.png" alt="">
+                    </div>
+                    <h4 class="pillar-title">ESTRATEGIA Y<br>RIESGO CLIMÁTICO</h4>
+                    <p class="pillar-desc">Evaluamos, medimos y diseñamos estrategias para enfrentar el cambio climático y avanzar hacia la carbono neutralidad.</p>
+                </article>
+                <article class="pillar-card" data-modal="modal-p2" data-bg="assets/images/Imagen4.png">
+                    <div class="pillar-icon">
+                        <img src="assets/images/simbolo2.png" alt="">
+                    </div>
+                    <h4 class="pillar-title">CUMPLIMIENTO Y<br>GOBERNANZA AMBIENTAL</h4>
+                    <p class="pillar-desc">Aseguramos que las operaciones cumplan con la normativa vigente, minimizando riesgos y fortaleciendo la gestión ambiental</p>
+                </article>
+                <article class="pillar-card" data-modal="modal-p3" data-bg="assets/images/Imagen5.png">
+                    <div class="pillar-icon">
+                        <img src="assets/images/simbolo3.png" alt="">
+                    </div>
+                    <h4 class="pillar-title">POSICIONAMIENTO Y<br>COMUNICACIÓN SOSTENIBLE</h4>
+                    <p class="pillar-desc">Fortalecemos la reputación y el liderazgo de las organizaciones a través de una comunicación transparente y responsable.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="contacto" data-offset-m="84"  data-offset-t="96"  data-offset-d="0">
+            <div class="parent-contacto">
+                <div class="contacto-hero">
+                    <h2>CONVERSEMOS</h2>
+                    <p class="contacto-sub">sobre cómo hacer más <span class="destacado">sostenible tu organización</span></p>
+                </div>
+                <div class="contacto-actions">
+                    <a class="contact-btn mail" href="mailto:contacto@innovemos.cl" aria-label="Enviar correo a Innovemos">
+                        <span class="fa-solid fa-envelope"></span>
+                        CONTACTO@INNOVEMOS.CL
+                    </a>
+                    <a class="contact-btn wsp" href="https://wa.me/56977602166?text=Hola%20Innovemos,%20quisiera%20más%20información.%20Gracias." target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+                        <span class="fa-brands fa-whatsapp"></span>
+                        +56 9 7760 2166
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <small>© 2025 <a href="#inicio"><strong>INNOVEMOS</strong></a>. Todos los derechos reservados.</small>
+        </div>
+    </footer>
+
+    <!-- MODALES -->
+    <div id="modal-p1" class="modal" aria-hidden="true">
+        <div class="modal__backdrop"></div>
+        <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-p1-title">
+            <button class="modal__close" aria-label="Cerrar modal">&times;</button>
+            <div class="modal__content">
+                <span class="modal__eyebrow">PILAR 1</span>
+                <h2 id="modal-p1-title" class="modal__title">Estrategia y<br>Riesgo Climático</h2>
+                <p class="modal__subtitle">Ayudamos a las organizaciones a comprender, medir y gestionar los riesgos y oportunidades climáticas, integrándolos en su estrategia de negocio o política pública.</p>
+                <div class="modal__cards">
+                    <article class="modalcard">
+                        <header class="modalcard__head">
+                            <span class="modalcard__bullet">›</span>
+                            <h3 class="modalcard__title">Evaluación de riesgos<br>climáticos</h3>
+                        </header>
+                        <div class="modalcard__body">
+                            <h4 class="modalcard__label">Servicio</h4>
+                            <p>Evaluamos riesgos y oportunidades —físicos y de transición— asociados al cambio climático. Incluye análisis de escenarios, impacto en la cadena de valor y vulnerabilidad de activos.</p>
+                            <h4 class="modalcard__label">Valor para el cliente</h4>
+                            <p>Permite anticipar y mitigar impactos, detectar nuevas oportunidades de negocio y fortalecer la divulgación financiera ante inversionistas sostenibles.</p>
+                        </div>
+                    </article>
+                    <article class="modalcard">
+                        <header class="modalcard__head">
+                            <span class="modalcard__bullet">›</span>
+                            <h3 class="modalcard__title">Estrategias de Descarbonización y Net-Zero</h3>
+                        </header>
+                        <div class="modalcard__body">
+                            <h4 class="modalcard__label">Servicio</h4>
+                            <p>Diseñamos e implementamos hojas de ruta hacia la carbono neutralidad. Incluye cálculo de huella de carbono, definición de metas, y proyectos de mitigación y compensación.</p>
+                            <h4 class="modalcard__label">Valor para el cliente</h4>
+                            <p>Mejora la reputación corporativa, reduce costos operativos y facilita el acceso a mercados sostenibles y fondos verdes</p>
+                        </div>
+                    </article>
+                    <article class="modalcard">
+                        <header class="modalcard__head">
+                            <span class="modalcard__bullet">›</span>
+                            <h3 class="modalcard__title">Economía Circular y Gestión de Recursos</h3>
+                        </header>
+                        <div class="modalcard__body">
+                            <h4 class="modalcard__label">Servicio</h4>
+                            <p>Asesoramos la transición hacia modelos circulares que reduzcan residuos y maximicen el valor de los recursos. Incluye diseño de productos circulares, gestión del ciclo de vida y simbiosis industrial.</p>
+                            <h4 class="modalcard__label">Valor para el cliente</h4>
+                            <p>Optimiza costos y materiales, disminuye la dependencia de recursos vírgenes y potencia la innovación y la imagen de marca.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-p2" class="modal" aria-hidden="true">
+        <div class="modal__backdrop"></div>
+        <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-p2-title">
+            <button class="modal__close" aria-label="Cerrar modal">&times;</button>
+            <div class="modal__content">
+                <span class="modal__eyebrow">PILAR 2</span>
+                <h2 id="modal-p2-title" class="modal__title">Cumplimiento y<br>Gobernanza Ambiental</h2>
+                <p class="modal__subtitle">Aseguramos que las organizaciones operen dentro del marco legal y regulatorio, fortaleciendo su gobernanza ambiental mediante sistemas de gestión eficientes y confiables.</p>
+                <div class="modal__cards">
+                    <article class="modalcard">
+                        <header class="modalcard__head">
+                            <span class="modalcard__bullet">›</span>
+                            <h3 class="modalcard__title">Auditorías y Due Diligence<br>Ambiental</h3>
+                        </header>
+                        <div class="modalcard__body">
+                            <h4 class="modalcard__label">Servicio</h4>
+                            <p>Realizamos auditorías de cumplimiento legal, evaluaciones de impacto ambiental (EIA) y due diligence en procesos de fusión o adquisición. Identificamos brechas y diseñamos planes de acción correctivos para garantizar la conformidad normativa.</p>
+                            <h4 class="modalcard__label">Valor para el cliente</h4>
+                            <p>Reduce el riesgo de multas y sanciones, asegura la continuidad operativa, facilita transacciones corporativas y refuerza la credibilidad frente a autoridades y stakeholders.</p>
+                        </div>
+                    </article>
+                    <article class="modalcard">
+                        <header class="modalcard__head">
+                            <span class="modalcard__bullet">›</span>
+                            <h3 class="modalcard__title">Mantenimiento de los Sistemas<br>de Gestión Ambiental</h3>
+                        </header>
+                        <div class="modalcard__body">
+                            <h4 class="modalcard__label">Servicio</h4>
+                            <p>Diseñamos, implementamos y acompañamos la mantención de Sistemas de Gestión Ambiental (SGA) bajo estándares internacionales, como la norma ISO 14001.</p>
+                            <h4 class="modalcard__label">Valor para el cliente</h4>
+                            <p>Mejora el desempeño ambiental, previene no conformidades, optimiza el uso de recursos y facilita el acceso a nuevos mercados, fortaleciendo la imagen corporativa.</p>
+                        </div>
+                    </article>
+                    <article class="modalcard">
+                        <header class="modalcard__head">
+                            <span class="modalcard__bullet">›</span>
+                            <h3 class="modalcard__title">Asesoría en Regulación y<br>Permisología Ambiental</h3>
+                        </header>
+                        <div class="modalcard__body">
+                            <h4 class="modalcard__label">Servicio</h4>
+                            <p>Brindamos asesoría especializada en la interpretación y aplicación de la normativa ambiental vigente. Gestionamos permisos, licencias y autorizaciones requeridas para operaciones y proyectos.</p>
+                            <h4 class="modalcard__label">Valor para el cliente</h4>
+                            <p>Garantiza la legalidad de las operaciones, agiliza aprobaciones y evita retrasos o sanciones por incumplimiento normativo.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-p3" class="modal" aria-hidden="true">
+        <div class="modal__backdrop"></div>
+        <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-p3-title">
+            <button class="modal__close" aria-label="Cerrar modal">&times;</button>
+            <div class="modal__content">
+                <span class="modal__eyebrow">PILAR 3</span>
+                <h2 id="modal-p3-title" class="modal__title">Posicionamiento y<br>Comunicación Sostenible</h2>
+                <p class="modal__subtitle">Comunicamos sostenibilidad desde la acción: visibilizando avances, fortaleciendo reputación y generando valor tangible e intangible.</p>
+                <div class="modal__cards">
+                    <article class="modalcard">
+                        <header class="modalcard__head">
+                            <span class="modalcard__bullet">›</span>
+                            <h3 class="modalcard__title">Reportes de Sostenibilidad<br>y ESG (GRI, SASB, TCFD)</h3>
+                        </header>
+                        <div class="modalcard__body">
+                            <h4 class="modalcard__label">Servicio</h4>
+                            <p>Elaboramos y verificamos reportes de sostenibilidad alineados a estándares internacionales (GRI, SASB, TCFD), garantizando transparencia, trazabilidad y credibilidad en la información ESG (Ambiental, Social y Gobernanza).</p>
+                            <h4 class="modalcard__label">Valor para el cliente</h4>
+                            <p>Facilita el acceso a financiamiento sostenible, fortalece la confianza con inversionistas y grupos de interés, y posiciona a la organización como líder en sostenibilidad</p>
+                        </div>
+                    </article>
+                    <article class="modalcard">
+                        <header class="modalcard__head">
+                            <span class="modalcard__bullet">›</span>
+                            <h3 class="modalcard__title">Estrategia de Comunicación de<br>Sostenibilidad</h3>
+                        </header>
+                        <div class="modalcard__body">
+                            <h4 class="modalcard__label">Servicio</h4>
+                            <p>Diseñamos estrategias de comunicación interna y externa para visibilizar los compromisos y avances en sostenibilidad. Incluye planes de marketing verde, relaciones públicas y campañas de posicionamiento responsable.</p>
+                            <h4 class="modalcard__label">Valor para el cliente</h4>
+                            <p>Refuerza la marca empleadora, atrae y retiene talento, genera lealtad de clientes y mejora la reputación corporativa.</p>
+                        </div>
+                    </article>
+                    <article class="modalcard">
+                        <header class="modalcard__head">
+                            <span class="modalcard__bullet">›</span>
+                            <h3 class="modalcard__title">Capacitación y Sensibilización<br>en Sostenibilidad</h3>
+                        </header>
+                        <div class="modalcard__body">
+                            <h4 class="modalcard__label">Servicio</h4>
+                            <p>Desarrollamos programas de formación y talleres personalizados para equipos directivos y colaboradores, abordando temáticas como cambio climático, gestión ambiental y cultura sostenible.</p>
+                            <h4 class="modalcard__label">Valor para el cliente</h4>
+                            <p>Promueve una cultura organizacional comprometida con la sostenibilidad, empodera al personal y asegura la implementación efectiva de políticas y buenas prácticas.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== NAVEGACIÓN MÓVIL ==========
+        (function() {
+            const toggle = document.querySelector('.nav-toggle');
+            const links = document.querySelector('.nav-links');
+            
+            if (!toggle || !links) return;
+            
+            toggle.addEventListener('click', () => {
+                const isOpen = links.classList.toggle('active');
+                toggle.setAttribute('aria-expanded', isOpen);
+            });
+            
+            // Cerrar al hacer clic en un enlace
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    links.classList.remove('active');
+                    toggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+            
+            // Cerrar en desktop
+            const mq = matchMedia('(min-width: 768px)');
+            const handleResize = e => {
+                if (e.matches) {
+                    links.classList.remove('active');
+                    toggle.setAttribute('aria-expanded', 'false');
+                }
+            };
+            
+            mq.addEventListener ? mq.addEventListener('change', handleResize) : mq.addListener(handleResize);
+        })();
+
+        // ========== SMOOTH SCROLL ==========
+
+// ===== Scroll con offset por breakpoint y por sección =====
+(function () {
+  // Defaults por viewport (se usan si la sección no define data-offset-*)
+  const DEFAULTS = { m: 84, t: 96, d: 112 };
+
+  const getVP = () => {
+    const w = window.innerWidth;
+    if (w >= 1024) return 'd';
+    if (w >= 768)  return 't';
+    return 'm';
+  };
+
+  const getOffset = (el) => {
+    const vp = getVP();
+    // 1) específico por viewport
+    const specific = el.getAttribute(`data-offset-${vp}`);
+    if (specific && !Number.isNaN(parseInt(specific))) return parseInt(specific, 10);
+    // 2) genérico para todos
+    const generic = el.getAttribute('data-offset');
+    if (generic && !Number.isNaN(parseInt(generic))) return parseInt(generic, 10);
+    // 3) por defecto
+    return DEFAULTS[vp];
+  };
+
+  const smoothTo = (el) => {
+    const top = window.pageYOffset + el.getBoundingClientRect().top - getOffset(el);
+    window.scrollTo({ top, behavior: 'smooth' });
+  };
+
+  // Clicks en navbar, botones y cualquier <a href="#…">
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const sel = a.getAttribute('href');
+      if (!sel || sel === '#') return;
+      const target = document.querySelector(sel);
+      if (!target) return;
+      e.preventDefault();
+      smoothTo(target);
+      // Opcional: cerrar menú móvil si está abierto
+      const links = document.querySelector('.nav-links');
+      const toggle = document.querySelector('.nav-toggle');
+      if (links && toggle && links.classList.contains('active')) {
+        links.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  // Ajusta si se carga con hash en la URL (ej: /#contacto)
+  window.addEventListener('load', () => {
+    if (location.hash) {
+      const target = document.querySelector(location.hash);
+      if (target) setTimeout(() => smoothTo(target), 0);
+    }
+  });
+
+  // Reajusta al cambiar el tamaño (por si cambias de breakpoint)
+  let prev = getVP();
+  window.addEventListener('resize', () => {
+    const now = getVP();
+    if (now !== prev && location.hash) {
+      const target = document.querySelector(location.hash);
+      if (target) setTimeout(() => smoothTo(target), 0);
+      prev = now;
+    }
+  });
+})();
+
+
+
+        // ========== ANIMACIÓN CARDS EQUIPO ==========
+        (function() {
+            const cards = document.querySelectorAll('.team-card');
+            if (!cards.length || !('IntersectionObserver' in window)) return;
+            
+            cards.forEach((card, i) => {
+                card.style.transitionDelay = `${i * 80}ms`;
+            });
+            
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    }
+                });
+            }, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' });
+            
+            cards.forEach(card => observer.observe(card));
+        })();
+
+        // ========== MODALES ==========
+        (function() {
+            const modals = {
+                elements: {},
+                scrollY: 0,
+                
+                open(modalId, bgUrl) {
+                    const modal = document.getElementById(modalId);
+                    if (!modal) return;
+                    
+                    const dialog = modal.querySelector('.modal__dialog');
+                    if (bgUrl && dialog) {
+                        dialog.style.backgroundImage = `url('${bgUrl}')`;
+                    }
+                    
+                    // Guardar posición y bloquear scroll
+                    this.scrollY = window.pageYOffset;
+                    document.documentElement.classList.add('modal-lock');
+                    document.body.classList.add('modal-lock');
+                    document.body.style.top = `-${this.scrollY}px`;
+                    
+                    // Compensar barra de scroll
+                    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+                    if (scrollbarWidth > 0) {
+                        document.body.style.paddingRight = `${scrollbarWidth}px`;
+                    }
+                    
+                    modal.classList.add('is-open');
+                    modal.setAttribute('aria-hidden', 'false');
+                    
+                    // Foco en botón cerrar
+                    const closeBtn = modal.querySelector('.modal__close');
+                    if (closeBtn) closeBtn.focus();
+                },
+                
+                close(modal) {
+                    if (!modal) return;
+                    
+                    modal.classList.remove('is-open');
+                    modal.setAttribute('aria-hidden', 'true');
+                    
+                    document.documentElement.classList.remove('modal-lock');
+                    document.body.classList.remove('modal-lock');
+                    document.body.style.top = '';
+                    document.body.style.paddingRight = '';
+                    
+                    window.scrollTo(0, this.scrollY);
+                }
+            };
+            
+            // Abrir modal desde pilares
+            document.querySelectorAll('.pillar-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const modalId = this.dataset.modal;
+                    const bg = this.dataset.bg;
+                    if (modalId) modals.open(modalId, bg);
+                });
+                
+                // Soporte teclado
+                card.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        const modalId = this.dataset.modal;
+                        const bg = this.dataset.bg;
+                        if (modalId) modals.open(modalId, bg);
+                    }
+                });
+                
+                card.setAttribute('tabindex', '0');
+                card.setAttribute('role', 'button');
+            });
+            
+            // Cerrar modal
+            document.addEventListener('click', e => {
+                const closeBtn = e.target.closest('.modal__close');
+                const backdrop = e.target.classList.contains('modal__backdrop');
+                
+                if (closeBtn || backdrop) {
+                    const modal = e.target.closest('.modal');
+                    if (modal) modals.close(modal);
+                }
+            });
+            
+            // Cerrar con ESC
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape') {
+                    const openModal = document.querySelector('.modal.is-open');
+                    if (openModal) modals.close(openModal);
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
